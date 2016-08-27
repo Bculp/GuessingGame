@@ -2,13 +2,30 @@
       .center {
         text-align: center;
       }
+      #headers {
+        color: #eefaff;
+      }
+      body {
+        background-image: url(http://www.walldevil.com/wallpapers/w01/419381-abstract-blue-matrix-numbers-symbols.jpg);
+        
+      }
+      #app {
+        background-color: rgba(10, 9, 9, 0.3);
+      }
+      #subtitle {
+        margin-top: 6%;
+        
+      }
       #input-parent {
         position:relative;
+        margin-top: 2%;
+        margin-bottom: 3%;
       }
       #player-input {
         border-radius: 80px;
         height: 160px;
         width: 160px;
+        font-size:40px;
       }
       
       #submit {
@@ -31,6 +48,8 @@
         font-size:60px;
         margin: 5px;
         padding: 0px 20px;
+        background-color:white;
+        opacity: .9;
       }
       #menu-btns {
           margin:30px;
@@ -44,7 +63,8 @@
       #footer {
           width: 100%;
           border-top: solid 2px black;
-          background-color: white;
+          background-color: rgba(255, 255, 255, 0.98);
+          
           position: fixed;
           bottom: 0;
 
