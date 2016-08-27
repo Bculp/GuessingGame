@@ -3,10 +3,12 @@
   <head>
     <title>Guessing Game</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   </head>
   <body>
 
-      <div id='app' class="center">
+      <div id='app' class="center container">
 
         <div id='headers'>
           <!-- Title and subtitles! -->
@@ -18,7 +20,7 @@
           <div id='input-parent'>
             <!-- Player's guess input, and submit button -->
             <input id="player-input" class="center" placeholder="Enter guess" maxlength="3" autofocus=autofocus></input>
-            <button id="submit">Submit</button>
+            <button id="submit" class="btn btn-primary">Submit</button>
           </div>
 
           <div id='guesses'>
@@ -32,8 +34,8 @@
 
           <div id="menu-btns">
             <!-- reset and hint buttons -->
-            <button id="resetbtn" class="center">Reset</button>
-            <button id="hintbtn" class="center">Hint</button>
+            <button id="resetbtn" class="center btn-warning">Reset</button>
+            <button id="hintbtn" class="center btn-info">Hint</button>
           </div>
         </div>
       </div>
@@ -42,15 +44,16 @@
 
     <div id='footer' class="center">
         <div>
-          <div class=''>
+          <div class='row'>
+            <div class='col-sm-4'>
             <img src='fa-logo@2x.png'></img>
           </div>
 
-          <div class=''>
-            <h4>Project by YOUR NAME HERE</h4>
+          <div class='col-sm-4'>
+            <h4>Project by Brandon Culp</h4>
           </div>
 
-          <div class=''>
+          <div class='col-sm-4'>
             <img src='grace_hopper_academy.png'></img>
           </div>
 
