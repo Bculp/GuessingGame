@@ -2,7 +2,16 @@
       .center {
         text-align: center;
       }
+      #player-input {
+        border-radius: 80px;
+        height: 160px;
+        width: 160px;
+      }
+      
       #submit {
+        border-radius: 80px;
+        height: 60px;
+        width: 60px;
         margin:20px;
       }
       ul {
