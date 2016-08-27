@@ -2,6 +2,9 @@
       .center {
         text-align: center;
       }
+      #input-parent {
+        position:relative;
+      }
       #player-input {
         border-radius: 80px;
         height: 160px;
@@ -13,6 +16,9 @@
         height: 60px;
         width: 60px;
         margin:20px;
+        position:absolute;
+        top:50%;
+        right:35%;
       }
       ul {
           list-style: none;
