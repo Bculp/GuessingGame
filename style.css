@@ -9,6 +9,14 @@
           list-style: none;
           padding: 0;
       }
+      .guess {
+        display:inline;
+        border: solid 1px;
+        border-radius: 8px;
+        font-size:60px;
+        margin: 5px;
+        padding: 0px 20px;
+      }
       #menu-btns {
           margin:30px;
 
