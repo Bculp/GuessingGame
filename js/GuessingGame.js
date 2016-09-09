@@ -80,7 +80,14 @@ Game.prototype.provideHint = function() {
 	return shuffle(arr);
 }
 
+//jquery
+$(document).ready(function() {
 
+	$('#submit').on('click',function() {
+		console.log('button clicked!');
+	})
+
+});
 
 
 
