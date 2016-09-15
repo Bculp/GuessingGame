@@ -42,14 +42,28 @@ Game.prototype.playersGuessSubmission = function(number) {
 }
 Game.prototype.checkGuess = function() {
 	if (this.playersGuess === this.winningNumber) {
+		$('#hint, #submit').prop('disabled', true);
+		$('#subtitle').text("Press RESET to play again!");
 		return "You Win!";
 	}
 	else if (this.pastGuesses.indexOf(this.playersGuess) != -1) {
+		$('#title').text("Guess Again!");
 		return "You have already guessed that number.";
 	}
-	else (this.pastGuesses.push(this.playersGuess));
-
+	else {
+		$('guesslist li:nth-child(' + this.pastGuesses.length + ')').text(this.playersGuess);
+		(this.pastGuesses.push(this.playersGuess));
+		if (this.isLower()) {
+			$('#subtitle').text("Guess Higher!");
+		}
+		else {
+			$('#subtitle').text("Guess Lower!");
+		}
+	}
 	if (this.pastGuesses.length === 5) {
+		$('#hint, #submit').prop('disabled',true);
+		$('#title').text("You Lose!");
+		$('#subtitle').text("Press RESET to play again!");
 		return "You Lose.";
 	}
 	else if (this.difference() < 10) {
@@ -82,12 +96,68 @@ Game.prototype.provideHint = function() {
 
 //jquery
 $(document).ready(function() {
+	var game = new Game();
+	
+	// var storeInputandClear = function() {
+	// 	var userInput = +$('#player-input').val();
+	// 	$('#player-input').val('');
+	// 	var output = game.playersGuessSubmission(userInput);
 
-	$('#submit').on('click',function() {
-		console.log('button clicked!');
-	})
+		// if(output === "You have already guessed that number.") {
+		// 	$('#title').text("Guess Again!");
+		// }
+		// else {  //doesn't currently work
+		// 	//$('#guesses').find('ul').val(output);
+
+		// }
+		// if (output === "You Win!") {
+		// 	$('#title').text(output);
+		// 	$('#subtitle').text("Click the RESET button to play again!")
+		// 	$('#submit').addClass(disabled);
+		// 	$('#hint').addClass(disabled);
+		// }
+		// else if (output === "You Lose.") {
+		// 	$('#title').text(output);
+		// 	$('#subtitle').text("Click the RESET button to play again!")
+		// 	$('#submit').addClass(disabled);
+		// 	$('#hint').addClass(disabled);
+		// }
+		// else {
+		// 	$('#title').text(output);
+		// 	var direction = "Guess ";
+		// 	console.log(game.isLower());
+		// 	if (game.isLower()) {
+		// 		direction += "Higher!";
+		// 	}
+		// 	else {
+		// 		direction += "Lower!";
+		// 	}
+		// 	$('#subtitle').text(direction);
+	// 	// }
+	// }
+var storeInputandClear = function() {
+		var userInput = +$('#player-input').val();
+		$('#player-input').val('');
+		var output = game.playersGuessSubmission(userInput);
+		$('#title').text(output);
+	}
+
+
+	$('#submit').on('click', storeInputandClear);
+	$(document).on('keydown', function(event) {
+		if (event.which === 13) {
+			//run above code;
+			storeInputandClear();
+		}
+	});
+
+	
+
 
 });
+
+
+//guesses aren't showing and hints aren't showing
 
 
 
