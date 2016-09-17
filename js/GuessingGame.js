@@ -46,42 +46,46 @@ Game.prototype.checkGuess = function() {
 		$('#subtitle').text("Press RESET to play again!");
 		return "You Win!";
 	}
-	else if (this.pastGuesses.indexOf(this.playersGuess) != -1) {
-		$('#title').text("Guess Again!");
+	else {
+
+		if (this.pastGuesses.indexOf(this.playersGuess) != -1) {
 		return "You have already guessed that number.";
-	}
-	else {
-		$('guesslist li:nth-child(' + this.pastGuesses.length + ')').text(this.playersGuess);
-		(this.pastGuesses.push(this.playersGuess));
-		if (this.isLower()) {
-			$('#subtitle').text("Guess Higher!");
 		}
+
 		else {
-			$('#subtitle').text("Guess Lower!");
+			this.pastGuesses.push(this.playersGuess);
+			$('#guesslist li:nth-child(' + this.pastGuesses.length + ')').text(this.playersGuess);
+			
+			if (this.pastGuesses.length === 5) {
+				$('#hint, #submit').prop('disabled',true);
+				$('#subtitle').text("Press RESET to play again!");
+				return "You Lose.";
+			}
+			else {
+				if (this.isLower()) {
+					$('#subtitle').text("Guess Higher!");
+				}
+				else {
+					$('#subtitle').text("Guess Lower!");
+				}
+
+				if (this.difference() < 10) {
+				return "You're burning up!";
+				}
+				else if (this.difference() < 25) {
+					return "You're lukewarm.";
+				}
+				else if (this.difference() < 50) {
+					return "You're a bit chilly.";
+				}
+				else {
+					return "You're ice cold!";
+				}
+			}
 		}
-	}
-	if (this.pastGuesses.length === 5) {
-		$('#hint, #submit').prop('disabled',true);
-		$('#title').text("You Lose!");
-		$('#subtitle').text("Press RESET to play again!");
-		return "You Lose.";
-	}
-	else if (this.difference() < 10) {
-		return "You're burning up!";
-	}
-	else if (this.difference() < 25) {
-		return "You're lukewarm.";
-	}
-	else if (this.difference() < 50) {
-		return "You're a bit chilly.";
-	}
-	else {
-		return "You're ice cold!";
 	}
 }
 
-//does this have to be on Game's prototype? wouldn't work
-//when it was...
 function newGame() {
 	return new Game();
 }
@@ -96,52 +100,14 @@ Game.prototype.provideHint = function() {
 
 //jquery
 $(document).ready(function() {
-	var game = new Game();
-	
-	// var storeInputandClear = function() {
-	// 	var userInput = +$('#player-input').val();
-	// 	$('#player-input').val('');
-	// 	var output = game.playersGuessSubmission(userInput);
 
-		// if(output === "You have already guessed that number.") {
-		// 	$('#title').text("Guess Again!");
-		// }
-		// else {  //doesn't currently work
-		// 	//$('#guesses').find('ul').val(output);
-
-		// }
-		// if (output === "You Win!") {
-		// 	$('#title').text(output);
-		// 	$('#subtitle').text("Click the RESET button to play again!")
-		// 	$('#submit').addClass(disabled);
-		// 	$('#hint').addClass(disabled);
-		// }
-		// else if (output === "You Lose.") {
-		// 	$('#title').text(output);
-		// 	$('#subtitle').text("Click the RESET button to play again!")
-		// 	$('#submit').addClass(disabled);
-		// 	$('#hint').addClass(disabled);
-		// }
-		// else {
-		// 	$('#title').text(output);
-		// 	var direction = "Guess ";
-		// 	console.log(game.isLower());
-		// 	if (game.isLower()) {
-		// 		direction += "Higher!";
-		// 	}
-		// 	else {
-		// 		direction += "Lower!";
-		// 	}
-		// 	$('#subtitle').text(direction);
-	// 	// }
-	// }
+var game = new Game();
 var storeInputandClear = function() {
 		var userInput = +$('#player-input').val();
 		$('#player-input').val('');
 		var output = game.playersGuessSubmission(userInput);
 		$('#title').text(output);
 	}
-
 
 	$('#submit').on('click', storeInputandClear);
 	$(document).on('keydown', function(event) {
@@ -150,16 +116,21 @@ var storeInputandClear = function() {
 			storeInputandClear();
 		}
 	});
-
-	
-
+	//reset btn
+	$('#resetbtn').on('click',function() {
+		//create new game
+		var game = new Game();
+		//reset title & subtitle
+		$('#title').text("Welcome to my guessing game!");
+		$('#subtitle').text("Guess a number between 1-100!");
+		//list of guesses isn't resetting but above are working
+		$('.guess').text('-');
+		$('#hint, #submit').prop('disabled',false);
+	});	
+	//hint btn
+	$('#hintbtn').on('click', function() {
+		var hint = game.provideHint();
+		$('#title').text("The winning number is either " + hint);
+	})
 
 });
-
-
-//guesses aren't showing and hints aren't showing
-
-
-
-
-
