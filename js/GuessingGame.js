@@ -97,11 +97,11 @@ Game.prototype.provideHint = function() {
 	}
 	return shuffle(arr);
 }
-
+var game = newGame();
 //jquery
 $(document).ready(function() {
 
-var game = new Game();
+
 var storeInputandClear = function() {
 		var userInput = +$('#player-input').val();
 		$('#player-input').val('');
@@ -119,7 +119,7 @@ var storeInputandClear = function() {
 	//reset btn
 	$('#resetbtn').on('click',function() {
 		//create new game
-		var game = new Game();
+		game = newGame();
 		//reset title & subtitle
 		$('#title').text("Welcome to my guessing game!");
 		$('#subtitle').text("Guess a number between 1-100!");
